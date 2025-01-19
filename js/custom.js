@@ -29,6 +29,7 @@ $(document).ready(function() {
         fade: true,
         adaptiveHeight: true,
   cssEase: 'linear',
+  arrows: true,
   
   
     });
