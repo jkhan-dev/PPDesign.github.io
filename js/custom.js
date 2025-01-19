@@ -27,7 +27,10 @@ $(document).ready(function() {
         autoplaySpeed: 4000,
         dots: true,
         fade: true,
-  cssEase: 'linear'
+        adaptiveHeight: true,
+  cssEase: 'linear',
+  
+  
     });
 
     // testimonial

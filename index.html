@@ -48,7 +48,7 @@
         .video-slider {
             position: relative;
             overflow: hidden;
-            height: 99vh;
+            height: 100vh;
         }
         .video-slider video {
             position: absolute;
@@ -68,6 +68,70 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
+        .slick-dots {
+            position: absolute;
+            top: 95%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex !important;
+            justify-content: center;
+            list-style: none;
+        }
+        .slick-dots li button:before {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+        .video-slider {
+            height: 40vh;
+        }
+        .pricing-plan {
+            padding: 15px;
+        }
+        .pricing-plan h3 {
+            font-size: 20px;
+        }
+        .price {
+            font-size: 24px;
+        }
+        .feature-list li {
+            font-size: 14px;
+        }
+        .slick-dots {
+            top: 90%; /* Move dots slightly lower */
+        }
+        .slick-dots li button:before {
+            font-size: 10px; /* Reduce dot size */
+        }
+    }
+    @media (max-width: 576px) {
+        .video-slider {
+            height: 30vh;
+        }
+        .video-content {
+            padding: 30px 5px;
+        }
+        .video-content h1 {
+            font-size: 1.5rem;
+        }
+        .video-content p {
+            font-size: 0.9rem;
+        }
+        .pricing-plan h3 {
+            font-size: 18px;
+        }
+        .price {
+            font-size: 20px;
+        }
+        .feature-list li {
+            font-size: 12px;
+        }
+        .slick-dots {
+            top: 92%; /* Further adjust position for very small screens */
+        }
+        .slick-dots li button:before {
+            font-size: 8px; /* Further reduce dot size */
+        }
+    }
     </style>
 </head>
 
