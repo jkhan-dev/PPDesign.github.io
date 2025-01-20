@@ -71,6 +71,7 @@ p {
     font-size: 14px;
     font-weight: 500;
     color: #121212;
+    line-height: 1.8;
 }
 
 input:focus,
@@ -81,10 +82,11 @@ select:focus-within {
     box-shadow: none !important;
 }
 
-.slick-prev:before,
+
+/* .slick-prev:before,
 .slick-next:before {
     display: none;
-}
+} */
 
 
 /* header css */
@@ -102,7 +104,7 @@ select:focus-within {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 999;
     background-color: rgba(255, 255, 255, 0);
 }
 
@@ -161,13 +163,80 @@ select:focus-within {
     height: 100vh;
 }
 
+.video-slider {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.video-slider video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
 .banner_slide_wrap .banner_img img {
     height: 100vh;
     object-fit: cover;
 }
 
+.banner_slider_wrapper .slick-prev,
+.banner_slider_wrapper .slick-next {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.banner_slider_wrapper .slick-prev {
+    left: 10px;
+}
+
+.banner_slider_wrapper .slick-next {
+    right: 10px;
+}
+
+.banner_slider_wrapper .slick-prev:before,
+.banner_slider_wrapper .slick-next:before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    z-index: 1;
+    opacity: 1;
+    border-style: solid;
+    border-color: #003c7a;
+    border-width: 3px 3px 0px 0px;
+    top: 9px;
+}
+
+.banner_slider_wrapper .slick-prev:before {
+    transform: rotate(-135deg);
+    left: 12px;
+}
+
+.banner_slider_wrapper .slick-next:before {
+    transform: rotate(45deg);
+    right: 11px;
+}
+
 .how-to-order {
-    padding: 50px 0px 70px;
+    padding: 80px 0px;
 }
 
 .title_wrapper {
@@ -178,7 +247,7 @@ select:focus-within {
 h2.section-title {
     font-size: 32px;
     line-height: 1.2;
-    margin-bottom: 18px;
+    margin-bottom: 40px;
     font-weight: 600;
     color: #003c7a;
 }
@@ -222,7 +291,7 @@ h2.section-title {
 }
 
 .choose-size {
-    padding-bottom: 70px;
+    padding-bottom: 80px;
 }
 
 .title_wrapper h6 {
@@ -230,6 +299,30 @@ h2.section-title {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 0px;
+}
+
+.price {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.feature-list li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.feature-list li::before {
+    content: '\2713';
+    color: green;
+    margin-right: 10px;
 }
 
 .add_btn {
@@ -264,8 +357,7 @@ h2.section-title {
 }
 
 .contact_artists {
-    /* background-image: linear-gradient(45deg, #f90000, #790232); */
-    padding: 60px 0px;
+    padding: 60px 0px 80px;
 }
 
 .contact_artists .section-title {
@@ -275,10 +367,6 @@ h2.section-title {
 
 .form-content-wrapper {
     width: 95%;
-}
-
-.contact_artists p {
-    /* color: #fff; */
 }
 
 .contact_artists img {
@@ -456,6 +544,11 @@ h2.section-title {
     color: #f90000;
 }
 
+.clients-testimonial .slick-prev:before,
+.clients-testimonial .slick-next:before {
+    display: none;
+}
+
 
 /* css for about us page */
 
@@ -497,7 +590,14 @@ h2.section-title {
 /* css for register page */
 
 .register_form_section {
-    padding: 70px 0px 40px;
+    padding: 80px 0px;
+}
+
+.register_form_section form {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px 30px 20px;
 }
 
 .register_form_section .form-group {
@@ -791,6 +891,12 @@ img.dash_logo {
     .responsive_table .table {
         width: 766px;
     }
+    .banner_slide_wrap {
+        height: 40vh;
+    }
+    .video-slider {
+        height: 40vh;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -824,8 +930,14 @@ img.dash_logo {
         width: 80px;
     }
     .banner_slide_wrap {
-        height: 50vh;
+        height: 32vh;
     }
+    .video-slider {
+        height: 32vh;
+    }
+    /* .video-slider video {
+        height: 40vh;
+    } */
     .banner_img img {
         height: 50vh;
         object-fit: cover;

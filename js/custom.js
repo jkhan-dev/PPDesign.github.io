@@ -1,12 +1,5 @@
 $(document).ready(function() {
     //for sticky header
-    // $(window).scroll(function() {
-    //     if ($(this).scrollTop() > 100) {
-    //         $('.main_header').addClass("sticky");
-    //     } else {
-    //         $('.main_header').removeClass("sticky");
-    //     }
-    // });
     const header = document.querySelector(".main_header");
     const toggleClass = "is-sticky";
 
@@ -23,15 +16,14 @@ $(document).ready(function() {
     $('.autoplay').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        // autoplay: true,
+        autoplay: true,
         autoplaySpeed: 4000,
-        dots: true,
+        dots: false,
         fade: true,
         adaptiveHeight: true,
-  cssEase: 'linear',
-  arrows: true,
-  
-  
+        cssEase: 'linear',
+
+
     });
 
     // testimonial
