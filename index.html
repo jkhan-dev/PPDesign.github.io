@@ -5,13 +5,27 @@
     <title>P&P</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/bootstrap.min.css" as="style" />
+    <link rel="preload" href="css/custom.css" as="style" />
+    <link rel="preload" href="css/video-slider.css" as="style" />
+    <link rel="preload" href="js/jquery.min.js" as="script" />
+    <link rel="preload" href="js/bootstrap.bundle.min.js" as="script" />
+    <link rel="preload" href="js/video-slider.js" as="script" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    
+    <!-- Fonts and styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/responsive-triple-slider.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -22,7 +36,7 @@
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-sm">
                         <a class="navbar-brand" href="index.html">
-                            <img src="images/logo.jpeg" alt="Main Logo" />
+                            <img src="images/logo.jpeg" alt="Main Logo" width="150" height="50" />
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -58,34 +72,104 @@
         </div>
     </header>
     <!-- main header end here -->
-    <!-- main banner section start -->
-    <section class="main_banner">
-        <div class="banner_slider_wrapper">
-            <div class="slider autoplay">
-                <div>
-                    <div class="banner_slide_wrap">
-                        <div class="video-slider">
-                            <video width="320" height="240" autoplay muted loop preload="auto">
-                                <source src="./1841356-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+    
+    <!-- Video Slider Section Start -->
+    <!-- <section class="video-slider-section"> -->
+     
+    <!-- </section> -->
+     
+    <!-- Triple Slider Section Start -->
+    <section class="triple-slider-section">
+        <div class="container">
+          
+            
+            <!-- Swiper Container -->
+            <div class="swiper tripleSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="./reel1 (1).mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
                             </video>
-                            <div class="video-overlay"></div>
+                            
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="./reel1 (2).mp4" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                            
+                                            </div>
+                                        </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="./reel1 (1).mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                            
+                                    </div>
+                                </div>
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="./reel1 (2).mp4" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                            
+                                            </div>
+                                        </div>
+                    <!-- Slide 5 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="3191572-hd_1920_1080_25fps.mp4" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                            
+                                            </div>
+                                        </div>
+                    <!-- Slide 6 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="4360158-hd_1920_1080_24fps.mp4" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                           
+                                            </div>
+                                        </div>
+                    <!-- Slide 7 -->
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <video autoplay muted loop playsinline>
+                                <source src="1841356-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                            
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="banner_slide_wrap">
-                        <div class="video-slider">
-                            <video width="320" height="240" autoplay muted loop preload="auto">
-                                <source src="./4360158-hd_1920_1080_24fps.mp4" type="video/mp4" />
-                            </video>
-                            <div class="video-overlay"></div>
-                        </div>
-                    </div>
-                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
-    <!-- main banner section end -->
+    <!-- Triple Slider Section End -->
+    <!-- Video Slider Section End -->
+    
     <!-- how to order section start -->
     <section class="how-to-order">
         <div class="container">
@@ -97,7 +181,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="order_items">
-                        <img src="images/choose.png" alt="Choose Item" />
+                        <img src="images/choose.png" alt="Choose Item" width="80" height="80" loading="lazy" />
                         <h3>Choose Item</h3>
                         <p>
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...
@@ -106,7 +190,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="order_items">
-                        <img src="images/details.png" alt="Enter Details" />
+                        <img src="images/details.png" alt="Enter Details" width="80" height="80" loading="lazy" />
                         <h3>Enter Details</h3>
                         <p>
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...
@@ -115,7 +199,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="order_items">
-                        <img src="images/commerce.png" alt="Review Order" />
+                        <img src="images/commerce.png" alt="Review Order" width="80" height="80" loading="lazy" />
                         <h3>Review Order</h3>
                         <p>
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...
@@ -126,6 +210,7 @@
         </div>
     </section>
     <!-- how to order section end -->
+    
     <!-- choose your size section start -->
     <section class="choose-size">
         <div class="container">
@@ -137,7 +222,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="size-card">
-                        <img src="images/card-img.jpg" alt="" />
+                        <img src="images/card-img.jpg" alt="Frame 1" width="300" height="200" loading="lazy" />
                         <div class="card-content">
                             <h3>Frame 1</h3>
                             <p>Ut enim ad minim veniam, quis nostrud
@@ -148,13 +233,13 @@
                                 <li>Pictures : 1</li>
                             </ul>
 
-                            <a href="#" class="add_btn btn" style="width: 100%;">Choose Size</a>
+                            <a href="./order-now.html" class="add_btn btn" style="width: 100%;">Choose Size</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="size-card">
-                        <img src="images/card-img.jpg" alt="" />
+                        <img src="images/card-img.jpg" alt="Frame 2" width="300" height="200" loading="lazy" />
                         <div class="card-content">
                             <h3>Frame 2</h3>
                             <p>Ut enim ad minim veniam, quis nostrud
@@ -171,7 +256,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="size-card">
-                        <img src="images/card-img.jpg" alt="" />
+                        <img src="images/card-img.jpg" alt="Frame 3" width="300" height="200" loading="lazy" />
                         <div class="card-content">
                             <h3>Frame 3</h3>
                             <p>Ut enim ad minim veniam, quis nostrud
@@ -188,7 +273,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="size-card">
-                        <img src="images/card-img.jpg" alt="" />
+                        <img src="images/card-img.jpg" alt="Frame 4" width="300" height="200" loading="lazy" />
                         <div class="card-content">
                             <h3>Frame 4</h3>
                             <p>Ut enim ad minim veniam, quis nostrud
@@ -207,153 +292,11 @@
         </div>
     </section>
     <!-- choose your size section end -->
-    <!-- testimonial start -->
-    <section class="clients-testimonial">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="title_wrapper">
-                        <h6>Clients Testimonial</h6>
-                        <h2 class="section-title">Happy Clients</h2>
-                    </div>
-                </div>
+    
+    <!-- Load remaining sections with JavaScript for better initial page load -->
+    <div id="remaining-content"></div>
 
-                <div class="col-md-12">
-                    <div class="slider testimonial">
-                        <!-- slide 1 -->
-                        <div>
-                            <div class="testimonial_slide">
-                                <img src="images/happy-clients.jpg" alt="" />
-                            </div>
-                        </div>
-                        <!-- slide 2 -->
-                        <div>
-                            <div class="testimonial_slide">
-                                <img src="images/happy-clients.jpg" alt="" />
-                            </div>
-                        </div>
-                        <!-- slide 3 -->
-                        <div>
-                            <div class="testimonial_slide">
-                                <img src="images/happy-clients.jpg" alt="" />
-                            </div>
-                        </div>
-                        <!-- slide 4 -->
-                        <div>
-                            <div class="testimonial_slide">
-                                <img src="images/happy-clients.jpg" alt="" />
-                            </div>
-                        </div>
-                        <!-- slide 5 -->
-                        <div>
-                            <div class="testimonial_slide">
-                                <img src="images/happy-clients.jpg" alt="" />
-                            </div>
-                        </div>
-                        <!-- slide 5 end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- testimonial end -->
-    <!-- contact the artists section start -->
-    <section class="contact_artists">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-12">
-                    <div class="form-content-wrapper">
-                        <h2 class="section-title">Contact the Atist</h2>
-                        <p>Fill in the to get in touch.</p>
-                        <img src="images/contact-artist.jpg" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-12">
-                    <div class="form_card">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="fname" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="lname" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="Cname" class="form-label">Company Name</label>
-                                        <input type="text" class="form-control" id="Cname" placeholder="Enter Company Name" name="company name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="topic" class="form-label">Which topic best fit your needs?</label
-                      >
-                      <select
-                        class="form-select"
-                        aria-label="Default select example"
-                        id="topic"
-                      >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="textareafield" class="form-label"
-                        >How can we help?</label
-                      >
-                      <textarea
-                        class="form-control"
-                        id="textareafield"
-                        rows="3"
-                        placeholder="Please share what you want us to help"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <button type="submit" class="btn submit_btn">
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- contact the artists section end -->
-
-    <!-- our newsletter section start -->
-    <!-- <section class="our-newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="newsletter_section">
-                        <h4>Subscribe to our newsletter</h4>
-                        <div class="newsletter_form">
-                            <input type="email" class="form-control" id="newsletter" name="EMAIL" placeholder="Enter your email">
-                            <button type="submit" class="btn subscribe_btn">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- our newsletter section end -->
-
-    <!-- footer area start -->
+    <!-- Footer -->
     <footer class="footer_area">
       <div class="container">
         <div class="row">
@@ -362,7 +305,7 @@
               <div class="row">
                 <div class="col-md-3">
                   <a href="index.html" class="footer_logo">
-                    <img src="images/logo.jpeg" alt="" />
+                                    <img src="images/logo.jpeg" alt="Footer Logo"  />
                   </a>
                 </div>
                 <div class="col-md-9">
@@ -402,22 +345,22 @@
                   <ul class="nav">
                     <li class="social_nav_item">
                       <a href="#">
-                        <img src="images/twitter.png" alt="Twitter" />
+                                            <img src="images/twitter.png" alt="Twitter" width="24" height="24" loading="lazy" />
                       </a>
                     </li>
                     <li class="social_nav_item">
                       <a href="#">
-                        <img src="images/facebook.png" alt="Facebook" />
+                                            <img src="images/facebook.png" alt="Facebook" width="24" height="24" loading="lazy" />
                       </a>
                     </li>
                     <li class="social_nav_item">
                       <a href="#">
-                        <img src="images/linkedin.png" alt="Linkedin" />
+                                            <img src="images/linkedin.png" alt="Linkedin" width="24" height="24" loading="lazy" />
                       </a>
                     </li>
                     <li class="social_nav_item">
                       <a href="#">
-                        <img src="images/youtube.png" alt="Youtube" />
+                                            <img src="images/youtube.png" alt="Youtube" width="24" height="24" loading="lazy" />
                       </a>
                     </li>
                   </ul>
@@ -431,9 +374,29 @@
     </footer>
     <!-- footer area end -->
 
+    <!-- Core Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/responsive-triple-slider.js"></script>
     <script src="js/custom.js"></script>
+    
+    <!-- Lazy load remaining content -->
+    <script>
+        // Load remaining content after initial page load
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $('#remaining-content').load('remaining-content.html', function() {
+                    // Initialize any scripts for the lazy-loaded content
+                    if (typeof initSlick === 'function') {
+                        initSlick();
+                    }
+                });
+            }, 1000);
+        });
+    </script>
   </body>
+
 </html>

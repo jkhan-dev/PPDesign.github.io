@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>P&P - Order Now</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- main header start here -->
+    <header class="main_header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-sm">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="images/logo.jpeg" alt="Main Logo" />
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+               <span class="navbar-toggler-icon"></span>
+               <span class="navbar-toggler-icon"></span>
+               <span class="navbar-toggler-icon"></span>
+            </button>
+
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="aboutus.html">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="orders.html">Our Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="register.html">Register</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav justify-content-end">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.html">Log In</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- main header end here -->
+
+    <!-- Product order page Section start here -->
+    <section class="product_order_now">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="product_img_wrapper">
+                        <img src="images/card-img.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="product_desc_wrapper">
+                        <h6 class="vendor_title">Vendor Name</h6>
+                        <h2 class="section-title">Frame 1</h2>
+                        <p class="sort_desc">Ut enim ad minim veniam, quis nostrud</p>
+                        <h5 class="price">₹1000</h5>
+                        <form action="#" method="post">
+                            <div class="variants">
+                                <div class="form-group">
+                                    <label for="size" class="form-label">Size in cm</label>
+                                    <select name="options[Size in cm]" id="size" class="form-select">
+                                       <option value="30 X 46 CM" selected="selected">30 X 46 CM</option>
+                                       <option value="40 X 60 CM">40 X 60 CM</option>
+                                       <option value="50 X 76 CM">50 X 76 CM</option>
+                                       <option value="55 X 55 CM">55 X 55 CM</option>
+                                       <option value="45 X 45 CM">45 X 45 CM</option>
+                                       <option value="35 X 35 CM">35 X 35 CM</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="frame" class="form-label">Frame</label>
+                                    <select name="optionsFrame]" id="frame" class="form-select">
+                                       <option value="30 X 46 CM" selected="selected">Without Frames</option>
+                                       <option value="40 X 60 CM">With Frames</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="quantity-wrapper">
+                                <label class="form-label">Quantity</label>
+                                <div class="quantity_selector_box">
+                                    <button type="button" class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                                    <input type="number" id="quantity" class="quantity-input" value="1" min="1">
+                                    <button type="button" class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                                </div>
+                            </div>
+
+                            <div class="submit_btn_warpper">
+                                <button type="submit" class="submit_btn">Add To Cart</button>
+                            </div>
+                        </form>
+
+                        <div class="description_wrap">
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to
+                                use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this
+                                the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is
+                                therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product order page Section end here -->
+
+
+    <!-- footer area start -->
+    <footer class="footer_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer_nav">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="index.html" class="footer_logo">
+                                    <img src="images/logo.jpeg" alt="" />
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <ul class="nav">
+                                    <li class="footer_nav_item">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="aboutus.html">About Us</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="orders.html">Our Orders</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="register.html">Register</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="login.html">Log In</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- copy right footer section -->
+                <div class="col-md-12">
+                    <div class="copyright_wrapper">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p>
+                                    © 2024 Brand Inc.<a href="#">Privacy</a>
+                                    <a href="#">Terms & Services</a>
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="nav">
+                                    <li class="social_nav_item">
+                                        <a href="#">
+                                            <img src="images/twitter.png" alt="Twitter" />
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
+                                            <img src="images/facebook.png" alt="Facebook" />
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
+                                            <img src="images/linkedin.png" alt="Linkedin" />
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
+                                            <img src="images/youtube.png" alt="Youtube" />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- copy right footer section -->
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            if (window.location.pathname.includes("order-now.html")) {
+                document.body.classList.add("order-now-page");
+            }
+        });
+    </script>
+    <script>
+        function changeQuantity(amount) {
+            let quantityInput = document.getElementById("quantity");
+            let currentValue = parseInt(quantityInput.value);
+
+            if (!isNaN(currentValue)) {
+                let newValue = currentValue + amount;
+                if (newValue >= 1) { // Prevent going below 1
+                    quantityInput.value = newValue;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

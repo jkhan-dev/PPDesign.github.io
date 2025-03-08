@@ -12,18 +12,56 @@ $(document).ready(function() {
         }
     });
 
-    // home banner slider
+    // Initialize video elements
+    $('.video-slider video').each(function() {
+        $(this).on('loadeddata', function() {
+            $(this).show();
+        });
+    });
+
+    // home banner slider (Suicide Squad style)
     $('.autoplay').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '100px',
+        slidesToShow: 3,
+        speed: 500,
         autoplay: true,
-        autoplaySpeed: 4000,
-        dots: false,
-        fade: true,
-        adaptiveHeight: true,
-        cssEase: 'linear',
+        autoplaySpeed: 3000,
+        dots: true,
+        arrows: true,
+        infinite: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    centerPadding: '60px',
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: '50px',
+                }
+            }
+        ]
+    }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // Pause all videos
+        $('.slider video').each(function() {
+            this.pause();
+        });
+    }).on('afterChange', function(event, slick, currentSlide) {
+        // Play the video in center slide
+        $('.slick-center video').each(function() {
+            this.play();
+        });
+    });
 
-
+    // Initially play the center video
+    $('.slick-center video').each(function() {
+        this.play();
     });
 
     // testimonial
@@ -52,7 +90,6 @@ $(document).ready(function() {
     });
 
     // js for sidebar toggler
-
     $(".sidebar_toggle_btn").click(function() {
         $(".sidebar").toggleClass("open");
         $(this).toggleClass('active');
