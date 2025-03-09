@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Swiper
+    // Check if device is mobile
+    const isMobile = window.innerWidth <= 767;
+    
+    // Set the --vh variable for better mobile height handling
+    function setVhVariable() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    // Initial call to set the --vh variable
+    setVhVariable();
+    
+    // Update the --vh variable on resize
+    window.addEventListener('resize', () => {
+        setVhVariable();
+    });
+    
+    // Initialize Swiper with different settings based on device
     const videoSwiper = new Swiper('.videoSwiper', {
         // Enable loop mode
         loop: true,
@@ -8,15 +25,20 @@ document.addEventListener('DOMContentLoaded', function() {
         centeredSlides: true,
         
         // Number of slides visible (will be overridden by breakpoints)
-        slidesPerView: 'auto',
+        slidesPerView: isMobile ? 1 : 'auto',
         
         // Space between slides
-        spaceBetween: 50,
+        spaceBetween: isMobile ? 0 : 50,
         
         // Smooth transition effect
-        effect: 'coverflow',
+        effect: isMobile ? 'fade' : 'coverflow',
         
-        // Coverflow effect settings
+        // Fade effect settings for mobile
+        fadeEffect: {
+            crossFade: true
+        },
+        
+        // Coverflow effect settings for desktop
         coverflowEffect: {
             rotate: 5,
             stretch: 0,
@@ -30,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Auto play settings
         autoplay: {
-            delay: 500000,
+            delay: 50000000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
@@ -41,8 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             onlyInViewport: false,
         },
         
-        // Pagination
-        pagination:false,
+    
         
         // Navigation arrows
         navigation: {
@@ -54,8 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         breakpoints: {
             // When window width is < 576px
             320: {
-                slidesPerView: 1.2,
-                spaceBetween: 20,
+                slidesPerView: isMobile ? 1 : 1.2,
+                spaceBetween: isMobile ? 0 : 20,
+                effect: isMobile ? 'fade' : 'coverflow',
                 coverflowEffect: {
                     depth: 100,
                     modifier: 1,
@@ -64,8 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // When window width is >= 576px
             576: {
-                slidesPerView: 1.5,
-                spaceBetween: 30,
+                slidesPerView: isMobile ? 1 : 1.5,
+                spaceBetween: isMobile ? 0 : 30,
+                effect: isMobile ? 'fade' : 'coverflow',
                 coverflowEffect: {
                     depth: 120,
                     modifier: 1.2,
@@ -76,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             768: {
                 slidesPerView: 2,
                 spaceBetween: 40,
+                effect: 'coverflow',
                 coverflowEffect: {
                     depth: 150,
                     modifier: 1.3,
@@ -86,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             992: {
                 slidesPerView: 2.5,
                 spaceBetween: 50,
+                effect: 'coverflow',
                 coverflowEffect: {
                     depth: 180,
                     modifier: 1.4,
@@ -96,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             1200: {
                 slidesPerView: 3,
                 spaceBetween: 60,
+                effect: 'coverflow',
                 coverflowEffect: {
                     depth: 200,
                     modifier: 1.5,
@@ -116,6 +142,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     animateActiveSlide();
                 }, 500);
+                
+                // Set full height for mobile
+                if (isMobile) {
+                    setFullHeightForMobile();
+                }
             },
             slideChangeTransitionStart: function() {
                 // Reset all slides
@@ -131,9 +162,34 @@ document.addEventListener('DOMContentLoaded', function() {
             resize: function() {
                 // Update swiper on resize
                 this.update();
+                
+                // Check if device width changed between mobile and desktop
+                const newIsMobile = window.innerWidth <= 767;
+                if (newIsMobile !== isMobile) {
+                    // Reload page to apply correct settings
+                    window.location.reload();
+                }
             }
         }
     });
+    
+    // Function to set full height for mobile
+    function setFullHeightForMobile() {
+        if (isMobile) {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            const videoCards = document.querySelectorAll('.video-card');
+            videoCards.forEach(card => {
+                card.style.height = `calc(100vh - 20px)`;
+            });
+            
+            const videoWrappers = document.querySelectorAll('.video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                wrapper.style.height = '100%';
+            });
+        }
+    }
     
     // Function to initialize videos
     function initializeVideos() {

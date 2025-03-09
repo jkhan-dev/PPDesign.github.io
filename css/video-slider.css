@@ -1,10 +1,11 @@
 /* Video Slider - Modern UI with Instagram Reel Format */
 :root {
-  
+
     --swiper-navigation-size: 24px;
     --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     --card-border-radius: 16px;
     --transition-speed: 0.4s;
+    --vh: 1vh; /* Variable for viewport height */
 }
 
 /* Video Showcase Header */
@@ -38,7 +39,7 @@
 /* Swiper Styles */
 .videoSwiper {
     width: 100%;
-    padding: 50px 0;
+    padding-top: 50px;
     position: relative;
     z-index: 2;
     overflow: visible;
@@ -264,6 +265,10 @@
     opacity: 0.7;
 }
 
+.mobile-info {
+    display: none;
+}
+
 /* Video Controls */
 .video-controls {
     position: absolute;
@@ -316,16 +321,91 @@
     opacity: 1;
 }
 
+/* Mobile Full Screen Mode */
+@media screen and (max-width: 767px) {
+    .video-slider-section {
+        padding: 0;
+        height: 100vh; /* Fallback */
+        height: calc(var(--vh, 1vh) * 100);
+        max-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .videoSwiper {
+        padding: 0;
+        height: 100%;
+    }
+    
+    .swiper-slide {
+        opacity: 0;
+        transform: scale(1);
+        filter: blur(0);
+        transition: opacity 0.5s ease;
+    }
+    
+    .swiper-slide-active {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 3;
+    }
+    
+    .video-card {
+        height: 100vh; /* Fallback */
+        height: calc(var(--vh, 1vh) * 100);
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .video-wrapper {
+        height: 100%;
+    }
+    
+    .video-controls {
+        bottom: 120px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .swiper-pagination {
+        bottom: 20px;
+    }
+    
+    .desktop-info {
+        display: none;
+    }
+    
+    .mobile-info {
+        display: block;
+    }
+    
+    .slider-info {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        margin-top: 0;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 1400px) {
     .video-card {
-        height: 600px;
+        height: 550px;
     }
 }
 
 @media screen and (max-width: 1200px) {
     .video-card {
-        height: 580px;
+        height: 500px;
     }
     
     .video-info h3 {
@@ -339,57 +419,50 @@
 
 @media screen and (max-width: 992px) {
     .videoSwiper {
-        padding: 50px 0;
-    }
-    
-    .video-card {
-        height: 500px;
-    }
-    
-    .swiper-button-next,
-    .swiper-button-prev {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .video-showcase {
-        padding: 40px 0;
-    }
-    
-    .videoSwiper {
         padding: 30px 0;
     }
     
     .video-card {
         height: 450px;
     }
-    
-    .video-info {
-        padding: 20px 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .video-showcase {
+        padding: 0;
     }
     
-    .video-info h3 {
-        font-size: 1.4rem;
+    .video-card {
+        height: 100vh;
     }
     
-    .video-info p {
-        -webkit-line-clamp: 2;
+    /* Adjust navigation for mobile */
+    .swiper-button-next,
+    .swiper-button-prev {
+        background: rgba(0, 0, 0, 0.3);
+        width: 40px;
+        height: 40px;
     }
     
-    .watch-btn {
-        padding: 8px 20px;
-        font-size: 0.9rem;
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 18px;
+    }
+    
+    /* Enhance pagination visibility on mobile */
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .swiper-pagination-bullet-active {
+        width: 30px;
     }
 }
 
 @media screen and (max-width: 576px) {
-    .video-showcase {
-        padding: 30px 0;
-    }
-    
     .video-card {
-        height: 420px;
+        height: 100vh;
     }
     
     .video-info h3 {
@@ -408,17 +481,6 @@
     .watch-btn {
         padding: 6px 15px;
         font-size: 0.8rem;
-    }
-    
-    .swiper-button-next,
-    .swiper-button-prev {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-        font-size: 14px;
     }
 }
 
