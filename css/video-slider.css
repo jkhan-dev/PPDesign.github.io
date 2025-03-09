@@ -11,7 +11,7 @@
 /* Video Showcase Header */
 .video-showcase {
     padding: 60px 0;
-    background: var(--gradient-bg);
+    background: whitesmoke;
     position: relative;
     overflow: hidden;
 }
@@ -482,22 +482,7 @@
     }
 }
 
-/* Animation for active card */
-@keyframes cardPulse {
-    0% {
-        transform: scale(1.05);
-    }
-    50% {
-        transform: scale(1.08);
-    }
-    100% {
-        transform: scale(1.05);
-    }
-}
 
-.swiper-slide-active .video-card {
-    animation: cardPulse 3s infinite ease-in-out;
-}
 
 /* Video Loader Styles */
 .video-loader {

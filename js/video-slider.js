@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const videoCards = document.querySelectorAll('.video-card');
             videoCards.forEach(card => {
-                card.style.height = `calc(100vh - 67px)`;
+                card.style.height = `calc(90vh - 67px)`;
             });
             
             const videoWrappers = document.querySelectorAll('.video-wrapper');
