@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Auto play settings
         autoplay: {
-            delay: 50000000,
+            delay: 500000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         breakpoints: {
             // When window width is < 576px
             320: {
-                slidesPerView: 1,
+                slidesPerView: 1.2,
                 spaceBetween: 20,
                 coverflowEffect: {
                     depth: 100,
@@ -137,35 +137,70 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to initialize videos
     function initializeVideos() {
-        const videos = document.querySelectorAll('.video-wrapper video');
+        const videoWrappers = document.querySelectorAll('.video-wrapper');
         
-        videos.forEach(function(video) {
-            // Set video attributes
-            video.muted = true;
-            video.loop = true;
-            video.playsInline = true;
-            video.preload = 'metadata';
+        videoWrappers.forEach(function(wrapper) {
+            // Add loader to each video wrapper
+            const loader = document.createElement('div');
+            loader.className = 'video-loader';
+            loader.innerHTML = '<div class="loader-spinner"></div>';
+            wrapper.appendChild(loader);
             
-            // Add data attribute to track state
-            video.dataset.playing = 'false';
+            const video = wrapper.querySelector('video');
             
-            // Add event listeners
-            video.addEventListener('loadedmetadata', function() {
-                // Show video once metadata is loaded
-                // this.style.opacity = '1';
-            });
-            
-            // Error handling
-            video.addEventListener('error', function() {
-                const wrapper = this.closest('.video-wrapper');
-                if (wrapper) {
-                    wrapper.innerHTML = `
-                        <div class="video-placeholder">
-                            <span>Video unavailable</span>
-                        </div>
-                    `;
-                }
-            });
+            if (video) {
+                // Set video attributes
+                video.muted = true;
+                video.loop = true;
+                video.playsInline = true;
+                video.preload = 'metadata';
+                
+                // Add data attribute to track state
+                video.dataset.playing = 'false';
+                video.dataset.loaded = 'false';
+                
+                // Add event listeners
+                video.addEventListener('loadedmetadata', function() {
+                    // Mark as metadata loaded
+                    video.dataset.metadataLoaded = 'true';
+                });
+                
+                video.addEventListener('canplay', function() {
+                    // Show video once it can play
+                    this.style.opacity = '1';
+                    
+                    // Hide loader
+                    const loader = this.closest('.video-wrapper').querySelector('.video-loader');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 300);
+                    }
+                    
+                    // Mark as loaded
+                    video.dataset.loaded = 'true';
+                });
+                
+                // Error handling
+                video.addEventListener('error', function() {
+                    const wrapper = this.closest('.video-wrapper');
+                    if (wrapper) {
+                        // Remove loader
+                        const loader = wrapper.querySelector('.video-loader');
+                        if (loader) {
+                            wrapper.removeChild(loader);
+                        }
+                        
+                        // Show error message
+                        wrapper.innerHTML = `
+                            <div class="video-placeholder">
+                                <span>Video unavailable</span>
+                            </div>
+                        `;
+                    }
+                });
+            }
         });
         
         // Start playing the active slide video
@@ -178,6 +213,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (activeSlide) {
             const video = activeSlide.querySelector('video');
             if (video) {
+                // If video has a data-src attribute, set the src to start loading
+                if (video.hasAttribute('data-src') && !video.hasAttribute('src')) {
+                    video.src = video.dataset.src;
+                }
+                
                 video.play().catch(function(error) {
                     console.log('Auto-play was prevented:', error);
                     
@@ -204,6 +244,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.pause();
                 video.dataset.playing = 'false';
             } else if (activeVideo) {
+                // If video has a data-src attribute and no src, set the src
+                if (activeVideo.hasAttribute('data-src') && !activeVideo.hasAttribute('src')) {
+                    // Show loader
+                    const loader = activeVideo.closest('.video-wrapper').querySelector('.video-loader');
+                    if (loader) {
+                        loader.style.display = 'flex';
+                        loader.style.opacity = '1';
+                    }
+                    
+                    activeVideo.src = activeVideo.dataset.src;
+                }
+                
                 activeVideo.play().catch(function(error) {
                     console.log('Auto-play was prevented on slide change:', error);
                 });
@@ -233,8 +285,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateActiveSlide() {
         const activeSlide = document.querySelector('.swiper-slide-active');
         if (activeSlide) {
+            const info = activeSlide.querySelector('.video-info');
+            const details = activeSlide.querySelectorAll('.video-info p, .video-meta, .watch-btn');
             
+            if (info) {
+                info.style.transform = 'translateY(0)';
+            }
             
+            details.forEach(function(element, index) {
+                setTimeout(function() {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
         }
     }
     
@@ -252,20 +315,20 @@ document.addEventListener('DOMContentLoaded', function() {
         card.addEventListener('click', function() {
             if (this.closest('.swiper-slide-active')) {
                 const video = this.querySelector('video');
-            if (video) {
-                if (video.paused) {
-                    video.play();
+                if (video) {
+                    if (video.paused) {
+                        video.play();
                         video.dataset.playing = 'true';
                         this.classList.remove('video-paused');
-                } else {
-                    video.pause();
+                    } else {
+                        video.pause();
                         video.dataset.playing = 'false';
                         this.classList.add('video-paused');
                     }
+                }
             }
-        }
-    });
-    
+        });
+        
         // Add hover effect
         card.addEventListener('mouseenter', function() {
             if (this.closest('.swiper-slide-active')) {
@@ -370,7 +433,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add touch swiping instructions for mobile
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        document.querySelector('.slider-info').textContent = 'Swipe left or right to navigate';
+        const sliderInfo = document.querySelector('.slider-info');
+        if (sliderInfo) {
+            sliderInfo.textContent = 'Swipe left or right to navigate';
+        }
     }
     
     // Handle visibility change to pause videos when tab is not active
@@ -391,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Lazy load videos for better performance
     const lazyLoadVideos = function() {
-        const videoElements = document.querySelectorAll('.video-wrapper video[data-src]');
+        const videoElements = document.querySelectorAll('.video-wrapper video[data-src]:not([src])');
         const windowHeight = window.innerHeight;
         
         videoElements.forEach(function(video) {
@@ -402,8 +468,15 @@ document.addEventListener('DOMContentLoaded', function() {
             );
             
             if (isInViewport) {
+                // Show loader
+                const loader = video.closest('.video-wrapper').querySelector('.video-loader');
+                if (loader) {
+                    loader.style.display = 'flex';
+                    loader.style.opacity = '1';
+                }
+                
+                // Set video source to start loading
                 video.src = video.dataset.src;
-                video.removeAttribute('data-src');
             }
         });
     };
