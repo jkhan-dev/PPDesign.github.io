@@ -428,9 +428,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .video-showcase {
-        padding: 0;
-    }
+   
     
     .video-card {
         height: 100vh;
