@@ -20,12 +20,15 @@
     
     <!-- Fonts and styles -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
-    <link href="css/responsive-triple-slider.css" rel="stylesheet" />
+    <link href="css/video-slider.css" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
@@ -73,102 +76,117 @@
     </header>
     <!-- main header end here -->
     
-    <!-- Video Slider Section Start -->
-    <!-- <section class="video-slider-section"> -->
-     
-    <!-- </section> -->
-     
-    <!-- Triple Slider Section Start -->
-    <section class="triple-slider-section">
+    <!-- Video Slider Hero Section Start -->
+    <div class="video-showcase">
         <div class="container">
-          
             
-            <!-- Swiper Container -->
-            <div class="swiper tripleSwiper">
-                <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="./reel1 (1).mp4" type="video/mp4">
-                                Your browser does not support HTML5 video.
-                            </video>
-                            
-                        </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="./reel1 (2).mp4" type="video/mp4">
-                                                Your browser does not support HTML5 video.
-                                            </video>
-                            
-                                            </div>
-                                        </div>
-                    <!-- Slide 3 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="./reel1 (1).mp4" type="video/mp4">
-                                Your browser does not support HTML5 video.
-                            </video>
-                            
-                                    </div>
+            <!-- Video Slider Section -->
+            <section class="video-slider-section">
+                <div class="swiper videoSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Video 1 -->
+                        <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (1).mp4" muted loop playsinline></video>
+                                    <div class="mute-indicator">Sound Off</div>
                                 </div>
-                    <!-- Slide 4 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="./reel1 (2).mp4" type="video/mp4">
-                                                Your browser does not support HTML5 video.
-                                            </video>
-                            
-                                            </div>
-                                        </div>
-                    <!-- Slide 5 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="3191572-hd_1920_1080_25fps.mp4" type="video/mp4">
-                                                Your browser does not support HTML5 video.
-                                            </video>
-                            
-                                            </div>
-                                        </div>
-                    <!-- Slide 6 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="4360158-hd_1920_1080_24fps.mp4" type="video/mp4">
-                                                Your browser does not support HTML5 video.
-                                            </video>
-                           
-                                            </div>
-                                        </div>
-                    <!-- Slide 7 -->
-                    <div class="swiper-slide">
-                        <div class="slide-content">
-                            <video autoplay muted loop playsinline>
-                                <source src="1841356-uhd_3840_2160_30fps.mp4" type="video/mp4">
-                                                Your browser does not support HTML5 video.
-                                            </video>
-                            
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 2 -->
+                        <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (2).mp4" muted loop playsinline></video>
+                                   
+                                    <div class="mute-indicator">Sound Off</div>
+                                </div>
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 3 -->
+                       <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (1).mp4" muted loop playsinline></video>
+                                   
+                                    <div class="mute-indicator">Sound Off</div>
+                                </div>
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 4 -->
+                        <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (2).mp4" muted loop playsinline></video>
+                                   
+                                    <div class="mute-indicator">Sound Off</div>
+                                </div>
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 5 -->
+                        <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (1).mp4" muted loop playsinline></video>
+                                   
+                                    <div class="mute-indicator">Sound Off</div>
+                                </div>
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 6 -->
+                        <div class="swiper-slide">
+                            <div class="video-card">
+                                <div class="video-wrapper">
+                                    <video data-src="./reel1 (2).mp4" muted loop playsinline></video>
+                                   
+                                    <div class="mute-indicator">Sound Off</div>
+                                </div>
+                               
+                                <div class="video-controls">
+                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Navigation Controls -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
                 </div>
-                
-                <!-- Navigation Buttons -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                
-                <!-- Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
+            </section>
+            
+           
         </div>
-    </section>
-    <!-- Triple Slider Section End -->
-    <!-- Video Slider Section End -->
+    </div>
+    <!-- Video Slider Hero Section End -->
     
     <!-- how to order section start -->
     <section class="how-to-order">
@@ -298,79 +316,79 @@
 
     <!-- Footer -->
     <footer class="footer_area">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="footer_nav">
-              <div class="row">
-                <div class="col-md-3">
-                  <a href="index.html" class="footer_logo">
-                                    <img src="images/logo.jpeg" alt="Footer Logo"  />
-                  </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer_nav">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="index.html" class="footer_logo">
+                                    <img src="images/logo.jpeg" alt="Footer Logo" width="150" height="50" />
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <ul class="nav">
+                                    <li class="footer_nav_item">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="aboutus.html">About Us</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="orders.html">Our Orders</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="register.html">Register</a>
+                                    </li>
+                                    <li class="footer_nav_item">
+                                        <a href="login.html">Log In</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                  <ul class="nav">
-                    <li class="footer_nav_item">
-                      <a href="index.html">Home</a>
-                    </li>
-                    <li class="footer_nav_item">
-                      <a href="aboutus.html">About Us</a>
-                    </li>
-                    <li class="footer_nav_item">
-                      <a href="orders.html">Our Orders</a>
-                    </li>
-                    <li class="footer_nav_item">
-                      <a href="register.html">Register</a>
-                    </li>
-                    <li class="footer_nav_item">
-                      <a href="login.html">Log In</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- copy right footer section -->
-          <div class="col-md-12">
-            <div class="copyright_wrapper">
-              <div class="row">
-                <div class="col-md-9">
-                  <p>
-                    © 2024 Brand Inc.<a href="#">Privacy</a>
-                    <a href="#">Terms & Services</a>
-                  </p>
-                </div>
-                <div class="col-md-3">
-                  <ul class="nav">
-                    <li class="social_nav_item">
-                      <a href="#">
+                <!-- copy right footer section -->
+                <div class="col-md-12">
+                    <div class="copyright_wrapper">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p>
+                                    © 2024 Brand Inc.<a href="#">Privacy</a>
+                                    <a href="#">Terms & Services</a>
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="nav">
+                                    <li class="social_nav_item">
+                                        <a href="#">
                                             <img src="images/twitter.png" alt="Twitter" width="24" height="24" loading="lazy" />
-                      </a>
-                    </li>
-                    <li class="social_nav_item">
-                      <a href="#">
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
                                             <img src="images/facebook.png" alt="Facebook" width="24" height="24" loading="lazy" />
-                      </a>
-                    </li>
-                    <li class="social_nav_item">
-                      <a href="#">
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
                                             <img src="images/linkedin.png" alt="Linkedin" width="24" height="24" loading="lazy" />
-                      </a>
-                    </li>
-                    <li class="social_nav_item">
-                      <a href="#">
+                                        </a>
+                                    </li>
+                                    <li class="social_nav_item">
+                                        <a href="#">
                                             <img src="images/youtube.png" alt="Youtube" width="24" height="24" loading="lazy" />
-                      </a>
-                    </li>
-                  </ul>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <!-- copy right footer section -->
             </div>
-          </div>
-          <!-- copy right footer section -->
         </div>
-      </div>
     </footer>
     <!-- footer area end -->
 
@@ -380,7 +398,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <!-- Custom Scripts -->
-    <script src="js/responsive-triple-slider.js"></script>
+    <script src="js/video-slider.js"></script>
     <script src="js/custom.js"></script>
     
     <!-- Lazy load remaining content -->
@@ -397,6 +415,6 @@
             }, 1000);
         });
     </script>
-  </body>
+</body>
 
 </html>

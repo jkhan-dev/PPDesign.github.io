@@ -57,11 +57,11 @@ $(document).ready(function() {
         speed: 800,
         
         // Auto play settings
-        autoplay: {
-            delay: 6000,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
-        },
+        // autoplay: {
+        //     delay: 6000,
+        //     disableOnInteraction: true,
+        //     pauseOnMouseEnter: true,
+        // },
         
         // Pagination
         pagination: {

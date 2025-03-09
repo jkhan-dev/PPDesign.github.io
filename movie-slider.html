@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Showcase - Triple Slider</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/movie-slider.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" as="script">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/movie-slider.css">
+</head>
+
+<body>
+    <div class="movie-showcase">
+        <div class="container">
+            <header class="showcase-header">
+                <h1>Featured Movies</h1>
+                <p>Discover the latest blockbusters and fan favorites</p>
+            </header>
+            
+            <!-- Movie Slider Section -->
+            <section class="movie-slider-section">
+                <div class="swiper movieSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Movie 1 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_.jpg" alt="Iron Man" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>8.0</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>Iron Man</h3>
+                                    <p>After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2008</span>
+                                        <span class="duration">126 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie 2 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_.jpg" alt="Thor" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>7.0</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>Thor</h3>
+                                    <p>The powerful but arrogant god Thor is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2011</span>
+                                        <span class="duration">115 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie 3 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_.jpg" alt="Avengers" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>8.1</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>The Avengers</h3>
+                                    <p>Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2012</span>
+                                        <span class="duration">143 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie 4 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BMTYyOTUwNjAxM15BMl5BanBnXkFtZTgwODcyMjY5MTI@._V1_.jpg" alt="Black Panther" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>7.3</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>Black Panther</h3>
+                                    <p>T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and confront a challenger from his country's past.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2018</span>
+                                        <span class="duration">134 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie 5 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg" alt="Avengers: Infinity War" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>8.4</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>Avengers: Infinity War</h3>
+                                    <p>The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2018</span>
+                                        <span class="duration">149 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie 6 -->
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <div class="poster-wrapper">
+                                    <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" alt="Avengers: Endgame" loading="lazy">
+                                    <div class="movie-rating">
+                                        <span>8.4</span>
+                                    </div>
+                                </div>
+                                <div class="movie-info">
+                                    <h3>Avengers: Endgame</h3>
+                                    <p>After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more to reverse Thanos' actions.</p>
+                                    <div class="movie-meta">
+                                        <span class="year">2019</span>
+                                        <span class="duration">181 min</span>
+                                        <span class="genre">Action</span>
+                                    </div>
+                                    <button class="watch-btn">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Controls -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
+            
+            <div class="slider-info">
+                <p>Swipe or use arrow keys to navigate</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/movie-slider.js"></script>
+</body>
+
+</html> 
