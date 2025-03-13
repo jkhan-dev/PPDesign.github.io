@@ -49,10 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlide: 0,
         slideCount: document.querySelectorAll('.hero-video-slide').length,
         autoplayInterval: null,
-        autoplayDelay: 8000990, // 8 seconds between slides
+        autoplayDelay: 8000, // 8 seconds between slides
         isAnimating: false, // Flag to prevent rapid clicking
         touchStartX: 0,
         touchEndX: 0,
+        touchStartY: 0,
+        touchEndY: 0,
+        touchStartTime: 0,
+        touchEndTime: 0,
+        lastTapTime: 0, // For detecting double taps
         
         init: function() {
             if (!this.slides || this.slideCount === 0) return;
@@ -76,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Initialize videos
             this.initializeVideos();
             
-            // Set up touch events for mobile swipe
-            this.setupTouchEvents();
+            // Set up touch and click events
+            this.setupInteractionEvents();
             
             // Start autoplay
             this.startAutoplay();
@@ -105,31 +110,154 @@ document.addEventListener('DOMContentLoaded', function() {
             this.preloadNextSlide();
         },
         
-        setupTouchEvents: function() {
-            // Touch events for mobile swipe
+        setupInteractionEvents: function() {
+            // Handle both touch and click events for videos
+            this.slideItems.forEach((slide, index) => {
+                const video = slide.querySelector('video');
+                if (!video) return;
+                
+                // Create a transparent overlay for better touch/click handling
+                const overlay = document.createElement('div');
+                overlay.className = 'video-interaction-overlay';
+                slide.appendChild(overlay);
+                
+                // Click handler for desktop
+                overlay.addEventListener('click', (e) => {
+                    // Only handle direct clicks on the overlay (not on controls)
+                    if (e.target === overlay) {
+                        // Add visual feedback
+                        const slide = this.slideItems[index];
+                        slide.classList.add('tapped');
+                        setTimeout(() => {
+                            slide.classList.remove('tapped');
+                        }, 300);
+                        
+                        this.togglePlayPause(index);
+                        e.preventDefault();
+                    }
+                });
+                
+                // Touch events for mobile
+                overlay.addEventListener('touchstart', (e) => {
+                    // Store touch start position and time
+                    this.touchStartX = e.touches[0].clientX;
+                    this.touchStartY = e.touches[0].clientY;
+                    this.touchStartTime = new Date().getTime();
+                    
+                    // Don't prevent default here to allow scrolling if needed
+                }, { passive: true });
+                
+                overlay.addEventListener('touchend', (e) => {
+                    // Store touch end position and time
+                    this.touchEndX = e.changedTouches[0].clientX;
+                    this.touchEndY = e.changedTouches[0].clientY;
+                    this.touchEndTime = new Date().getTime();
+                    
+                    // Calculate touch distance and duration
+                    const touchDuration = this.touchEndTime - this.touchStartTime;
+                    const touchDistanceX = Math.abs(this.touchEndX - this.touchStartX);
+                    const touchDistanceY = Math.abs(this.touchEndY - this.touchStartY);
+                    
+                    // Check if it's a tap (short duration, small distance)
+                    if (touchDuration < 300 && touchDistanceX < 30 && touchDistanceY < 30) {
+                        // Check for double tap
+                        const currentTime = new Date().getTime();
+                        const timeSinceLastTap = currentTime - this.lastTapTime;
+                        
+                        if (timeSinceLastTap < 300) {
+                            // Double tap detected - prevent zoom
+                            e.preventDefault();
+                        } else {
+                            // Single tap - toggle play/pause
+                            // Add visual feedback
+                            const slide = this.slideItems[index];
+                            slide.classList.add('tapped');
+                            setTimeout(() => {
+                                slide.classList.remove('tapped');
+                            }, 300);
+                            
+                            this.togglePlayPause(index);
+                            e.preventDefault();
+                        }
+                        
+                        this.lastTapTime = currentTime;
+                    } else if (touchDistanceX > 50 && touchDistanceX > touchDistanceY) {
+                        // Handle swipe if horizontal movement is significant and greater than vertical
+                        if (this.touchEndX < this.touchStartX) {
+                            // Swipe left - next slide
+                            this.nextSlide();
+                        } else {
+                            // Swipe right - previous slide
+                            this.prevSlide();
+                        }
+                        e.preventDefault();
+                    }
+                });
+            });
+            
+            // Touch events for swipe navigation
             this.slides.addEventListener('touchstart', (e) => {
-                this.touchStartX = e.changedTouches[0].screenX;
+                this.touchStartX = e.touches[0].clientX;
+                this.touchStartY = e.touches[0].clientY;
+                this.touchStartTime = new Date().getTime();
             }, { passive: true });
             
             this.slides.addEventListener('touchend', (e) => {
-                this.touchEndX = e.changedTouches[0].screenX;
-                this.handleSwipe();
-            }, { passive: true });
+                this.touchEndX = e.changedTouches[0].clientX;
+                this.touchEndY = e.changedTouches[0].clientY;
+                this.touchEndTime = new Date().getTime();
+                
+                // Calculate touch distance and duration
+                const touchDuration = this.touchEndTime - this.touchStartTime;
+                const touchDistanceX = Math.abs(this.touchEndX - this.touchStartX);
+                const touchDistanceY = Math.abs(this.touchEndY - this.touchStartY);
+                
+                // Only handle as swipe if horizontal movement is significant and greater than vertical
+                if (touchDistanceX > 50 && touchDistanceX > touchDistanceY * 1.5) {
+                    if (this.touchEndX < this.touchStartX) {
+                        // Swipe left - next slide
+                        this.nextSlide();
+                    } else {
+                        // Swipe right - previous slide
+                        this.prevSlide();
+                    }
+                    e.preventDefault();
+                }
+            });
         },
         
-        handleSwipe: function() {
-            const threshold = 50; // Minimum distance required for swipe
-            const diff = this.touchStartX - this.touchEndX;
+        togglePlayPause: function(index) {
+            // If index is not provided, use current slide
+            const slideIndex = (index !== undefined) ? index : this.currentSlide;
             
-            if (Math.abs(diff) < threshold) return;
+            // Get the video element
+            const video = this.slideItems[slideIndex].querySelector('video');
+            if (!video) return;
             
-            if (diff > 0) {
-                // Swipe left, go to next slide
-                this.nextSlide();
+            if (video.paused) {
+                // Play video
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Update play/pause button
+                        if (videoControls) {
+                            videoControls.updatePlayPauseButton();
+                        }
+                    }).catch(error => {
+                        console.log('Video play error:', error);
+                    });
+                }
             } else {
-                // Swipe right, go to previous slide
-                this.prevSlide();
+                // Pause video
+                video.pause();
+                // Update play/pause button
+                if (videoControls) {
+                    videoControls.updatePlayPauseButton();
+                }
             }
+            
+            // Pause autoplay when user manually controls video
+            this.pauseAutoplay();
         },
         
         goToSlide: function(index) {
@@ -211,6 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.loop = true;
                 video.playsInline = true;
                 video.setAttribute('playsinline', ''); // For iOS
+                video.setAttribute('webkit-playsinline', ''); // For older iOS versions
                 
                 // Set preload attribute
                 if (index === 0) {
@@ -220,10 +349,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Pause all videos except the first one
-                // if (index !== 0) {
+                if (index !== 0) {
                     video.pause();
                     video.currentTime = 0;
-                // }
+                } else {
+                    // Play the first video
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log('Video play error:', error);
+                            // Handle autoplay restrictions
+                            if (error.name === 'NotAllowedError') {
+                                // Create a play button overlay for user interaction
+                                const playButton = document.createElement('div');
+                                playButton.className = 'video-play-button';
+                                playButton.innerHTML = '<i class="fas fa-play"></i>';
+                                video.parentNode.appendChild(playButton);
+                                
+                                // Add click event to play video
+                                playButton.addEventListener('click', () => {
+                                    video.play()
+                                        .then(() => {
+                                            playButton.remove();
+                                        })
+                                        .catch(err => console.log('Still cannot play:', err));
+                                });
+                            }
+                        });
+                    }
+                }
                 
                 // Handle video loading
                 video.addEventListener('loadedmetadata', function() {
@@ -249,6 +403,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Fade in the video once it's loaded
                     video.style.opacity = '1';
                 });
+                
+                // Handle video error
+                video.addEventListener('error', function(e) {
+                    console.error('Video error:', e);
+                    const slide = this.closest('.hero-video-slide');
+                    if (slide) {
+                        slide.classList.add('video-error');
+                        // Add error message if not already present
+                        if (!slide.querySelector('.video-error-message')) {
+                            const errorMsg = document.createElement('div');
+                            errorMsg.className = 'video-error-message';
+                            errorMsg.innerHTML = '<p>Video could not be loaded</p>';
+                            slide.appendChild(errorMsg);
+                        }
+                    }
+                });
+                
+                // Prevent default video click behavior
+                video.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
             });
         },
         
@@ -265,14 +440,39 @@ document.addEventListener('DOMContentLoaded', function() {
                         playPromise.catch(error => {
                             console.log('Video play error:', error);
                             // Auto-play was prevented, add a play button or handle as needed
+                            if (error.name === 'NotAllowedError') {
+                                // Create a play button overlay if not already present
+                                if (!video.parentNode.querySelector('.video-play-button')) {
+                                    const playButton = document.createElement('div');
+                                    playButton.className = 'video-play-button';
+                                    playButton.innerHTML = '<i class="fas fa-play"></i>';
+                                    video.parentNode.appendChild(playButton);
+                                    
+                                    // Add click event to play video
+                                    playButton.addEventListener('click', (e) => {
+                                        e.stopPropagation(); // Prevent event bubbling
+                                        video.play()
+                                            .then(() => {
+                                                playButton.remove();
+                                            })
+                                            .catch(err => console.log('Still cannot play:', err));
+                                    });
+                                }
+                            }
                         });
                     }
                 } else {
                     // Pause all other videos
                     if (!video.paused) {
-                        video.pause();
+                video.pause();
                     }
                     video.currentTime = 0;
+                    
+                    // Remove any play buttons from inactive slides
+                    const playButton = video.parentNode.querySelector('.video-play-button');
+                    if (playButton) {
+                        playButton.remove();
+                    }
                 }
             });
             
@@ -299,9 +499,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!this.playPauseBtn) return;
             
             // Set up event listeners
-            this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
-            this.muteBtn.addEventListener('click', () => this.toggleMute());
-            this.progressContainer.addEventListener('click', (e) => this.seekVideo(e));
+            this.playPauseBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                this.togglePlayPause();
+            });
+            
+            this.muteBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                this.toggleMute();
+            });
+            
+            this.progressContainer.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                this.seekVideo(e);
+            });
             
             // Update progress bar
             setInterval(() => this.updateProgress(), 100);
@@ -315,12 +526,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!activeVideo) return;
             
             if (activeVideo.paused) {
-                activeVideo.play();
-                this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                activeVideo.play()
+                    .then(() => {
+                        this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    })
+                    .catch(error => {
+                        console.log('Video play error:', error);
+                        this.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    });
             } else {
                 activeVideo.pause();
                 this.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
+            
+            // Pause autoplay when user manually controls video
+            videoSlider.pauseAutoplay();
         },
         
         updatePlayPauseButton: function() {
@@ -363,6 +583,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const rect = this.progressContainer.getBoundingClientRect();
             const pos = (e.clientX - rect.left) / rect.width;
             activeVideo.currentTime = pos * activeVideo.duration;
+            
+            // Pause autoplay when user manually controls video
+            videoSlider.pauseAutoplay();
         },
         
         formatTime: function(seconds) {
@@ -375,40 +598,89 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize video controls
     videoControls.init();
     
-    // Function to adjust portrait video sizing on desktop
+    // Function to adjust portrait video sizing on desktop and mobile
     function adjustPortraitVideoSizing() {
         const videos = document.querySelectorAll('.hero-video-slide video');
+        const isMobile = window.innerWidth <= 767;
         
         videos.forEach(video => {
             // Check if video metadata is loaded
             if (video.videoWidth && video.videoHeight) {
                 const isPortrait = video.videoHeight > video.videoWidth;
+                const container = video.closest('.hero-video-slide');
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
                 
-                if (isPortrait) {
-                    video.style.width = 'auto';
-                    video.style.height = '100%';
-                    video.classList.remove('landscape');
-                } else {
+                if (isMobile) {
+                    // On mobile, prioritize full width coverage
                     video.style.width = '100%';
                     video.style.height = 'auto';
                     video.style.objectFit = 'cover';
-                    video.classList.add('landscape');
+                    video.style.objectPosition = 'center';
+                    
+                    // If this makes the video too short, adjust to fill height instead
+                    if (video.offsetHeight < containerHeight) {
+                        video.style.width = 'auto';
+                        video.style.height = '100%';
+                    }
+                } else {
+                    // On desktop, handle based on orientation
+                    if (isPortrait) {
+                        video.style.width = 'auto';
+                        video.style.height = '100%';
+                        video.style.objectFit = 'contain';
+                        video.classList.remove('landscape');
+                    } else {
+                        // For landscape videos, ensure they appear in portrait mode
+                        video.style.width = '100%';
+                        video.style.height = '100%';
+                        video.style.objectFit = 'cover';
+                        video.style.objectPosition = 'center';
+                        video.classList.add('landscape');
+                    }
                 }
+                
+                // Ensure video is visible once properly sized
+                video.style.opacity = '1';
             } else {
                 // If metadata not loaded yet, add event listener
                 video.addEventListener('loadedmetadata', function() {
                     const isPortrait = video.videoHeight > video.videoWidth;
+                    const container = video.closest('.hero-video-slide');
+                    const containerWidth = container.clientWidth;
+                    const containerHeight = container.clientHeight;
                     
-                    if (isPortrait) {
-                        video.style.width = 'auto';
-                        video.style.height = '100%';
-                        video.classList.remove('landscape');
-                    } else {
+                    if (isMobile) {
+                        // On mobile, prioritize full width coverage
                         video.style.width = '100%';
                         video.style.height = 'auto';
                         video.style.objectFit = 'cover';
-                        video.classList.add('landscape');
+                        video.style.objectPosition = 'center';
+                        
+                        // If this makes the video too short, adjust to fill height instead
+                        if (video.offsetHeight < containerHeight) {
+                            video.style.width = 'auto';
+                            video.style.height = '100%';
+                        }
+                    } else {
+                        // On desktop, handle based on orientation
+                        if (isPortrait) {
+                            video.style.width = 'auto';
+                            video.style.height = '100%';
+                            video.style.objectFit = 'contain';
+                            video.classList.remove('landscape');
+                        } else {
+                            // For landscape videos, ensure they appear in portrait mode
+                            video.style.width = '100%';
+                            video.style.height = '100%';
+                            video.style.objectFit = 'cover';
+                            video.style.objectPosition = 'center';
+                            video.classList.add('landscape');
+                        }
                     }
+                    
+                    // Ensure video is visible once properly sized
+                    video.style.opacity = '1';
                 });
             }
         });
@@ -417,8 +689,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call the function initially
     adjustPortraitVideoSizing();
     
-    // Call it on window resize
+    // Call it on window resize and orientation change
     window.addEventListener('resize', adjustPortraitVideoSizing);
+    window.addEventListener('orientationchange', adjustPortraitVideoSizing);
     
     // Handle video error states
     document.querySelectorAll('.hero-video-slide video').forEach(video => {
