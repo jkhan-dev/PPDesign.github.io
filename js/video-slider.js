@@ -1,20 +1,61 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Check if device is mobile
-    const isMobile = window.innerWidth <= 767;
+    let isMobile = window.innerWidth <= 767;
     
     // Set the --vh variable for better mobile height handling
     function setVhVariable() {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        // Also adjust the hero section height directly for immediate effect
+        const heroSection = document.querySelector('.hero-video-section');
+        if (heroSection) {
+            const headerHeight = isMobile ? 60 : 80; // Adjust based on header height
+            heroSection.style.height = `calc(${vh * 100}px - ${headerHeight}px)`;
+            
+            // Ensure proper spacing between header and video section
+            heroSection.style.marginTop = `${headerHeight}px`;
+        }
     }
     
     // Initial call to set the --vh variable
     setVhVariable();
     
-    // Update the --vh variable on resize
-    window.addEventListener('resize', () => {
+    // Update the --vh variable on resize and orientation change
+    window.addEventListener('resize', function() {
         setVhVariable();
+        // Check if device width changed between mobile and desktop
+        const newIsMobile = window.innerWidth <= 767;
+        if (newIsMobile !== isMobile) {
+            // Update the isMobile variable
+            isMobile = newIsMobile;
+            // Apply the correct header height
+            const headerHeight = isMobile ? 60 : 80;
+            const heroSection = document.querySelector('.hero-video-section');
+            if (heroSection) {
+                heroSection.style.marginTop = `${headerHeight}px`;
+            }
+        }
     });
+    window.addEventListener('orientationchange', setVhVariable);
+    
+    // Function to adjust portrait video sizing on desktop
+    function adjustPortraitVideoSizing() {
+        if (window.innerWidth >= 768) {
+            const videoCards = document.querySelectorAll('.video-card');
+            const containerHeight = document.querySelector('.video-slider-section').offsetHeight;
+            
+            videoCards.forEach(card => {
+                // Set max height based on container
+                const maxHeight = containerHeight * 0.8;
+                card.style.maxHeight = `${maxHeight}px`;
+                
+                // Calculate width based on 9:16 aspect ratio
+                const width = maxHeight * (9/16);
+                card.style.maxWidth = `${width}px`;
+            });
+        }
+    }
     
     // Initialize Swiper with different settings based on device
     const videoSwiper = new Swiper('.videoSwiper', {
@@ -52,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Auto play settings
         autoplay: {
-            delay: 50000000,
+            delay: 8000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
@@ -63,7 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
             onlyInViewport: false,
         },
         
-    
+        // Pagination
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
         
         // Navigation arrows
         navigation: {
@@ -75,29 +121,19 @@ document.addEventListener('DOMContentLoaded', function() {
         breakpoints: {
             // When window width is < 576px
             320: {
-                slidesPerView: isMobile ? 1 : 1.2,
-                spaceBetween: isMobile ? 0 : 20,
-                effect: isMobile ? 'fade' : 'coverflow',
-                coverflowEffect: {
-                    depth: 100,
-                    modifier: 1,
-                    rotate: 0
-                }
+                slidesPerView: 1,
+                spaceBetween: 0,
+                effect: 'fade',
             },
             // When window width is >= 576px
             576: {
-                slidesPerView: isMobile ? 1 : 1.5,
-                spaceBetween: isMobile ? 0 : 30,
-                effect: isMobile ? 'fade' : 'coverflow',
-                coverflowEffect: {
-                    depth: 120,
-                    modifier: 1.2,
-                    rotate: 2
-                }
+                slidesPerView: 1,
+                spaceBetween: 0,
+                effect: 'fade',
             },
             // When window width is >= 768px
             768: {
-                slidesPerView: 2,
+                slidesPerView: 1.5,
                 spaceBetween: 40,
                 effect: 'coverflow',
                 coverflowEffect: {
@@ -108,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // When window width is >= 992px
             992: {
-                slidesPerView: 2.5,
+                slidesPerView: 2,
                 spaceBetween: 50,
                 effect: 'coverflow',
                 coverflowEffect: {
@@ -119,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // When window width is >= 1200px
             1200: {
-                slidesPerView: 3,
+                slidesPerView: 2.5,
                 spaceBetween: 60,
                 effect: 'coverflow',
                 coverflowEffect: {
@@ -146,6 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Set full height for mobile
                 if (isMobile) {
                     setFullHeightForMobile();
+                } else {
+                    // Adjust portrait video sizing on desktop
+                    adjustPortraitVideoSizing();
                 }
             },
             slideChangeTransitionStart: function() {
@@ -181,12 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const videoCards = document.querySelectorAll('.video-card');
             videoCards.forEach(card => {
-                card.style.height = `calc(90vh - 67px)`;
+                card.style.height = `calc(100vh - 0px)`;
+                card.style.height = `calc(var(--vh, 1vh) * 100)`;
             });
             
             const videoWrappers = document.querySelectorAll('.video-wrapper');
             videoWrappers.forEach(wrapper => {
                 wrapper.style.height = '100%';
+                wrapper.style.width = '100%';
             });
         }
     }
@@ -219,6 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.addEventListener('loadedmetadata', function() {
                     // Mark as metadata loaded
                     video.dataset.metadataLoaded = 'true';
+                    
+                    // Check video dimensions and adjust object-fit
+                    checkVideoOrientation(this);
                 });
                 
                 video.addEventListener('canplay', function() {
@@ -263,6 +307,23 @@ document.addEventListener('DOMContentLoaded', function() {
         playActiveSlideVideo();
     }
     
+    // Function to check video orientation and adjust object-fit
+    function checkVideoOrientation(video) {
+        // When metadata is loaded, check the video dimensions
+        if (video.videoWidth && video.videoHeight) {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            
+            // If video is landscape (width > height)
+            if (aspectRatio > 1) {
+                video.style.objectFit = 'contain';
+                video.style.backgroundColor = '#000';
+            } else {
+                // Portrait or square video
+                video.style.objectFit = 'cover';
+            }
+        }
+    }
+    
     // Function to play active slide video
     function playActiveSlideVideo() {
         const activeSlide = document.querySelector('.swiper-slide-active');
@@ -289,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Function to pause all videos except active
+    // Function to handle videos on slide change
     function handleVideosOnSlideChange() {
         const videos = document.querySelectorAll('.video-wrapper video');
         const activeSlide = document.querySelector('.swiper-slide-active');
@@ -299,6 +360,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (video !== activeVideo) {
                 video.pause();
                 video.dataset.playing = 'false';
+                
+                // Ensure non-active slides have background
+                const videoCard = video.closest('.video-card');
+                if (videoCard) {
+                    videoCard.style.background = 'var(--card-bg)';
+                }
             } else if (activeVideo) {
                 // If video has a data-src attribute and no src, set the src
                 if (activeVideo.hasAttribute('data-src') && !activeVideo.hasAttribute('src')) {
@@ -310,6 +377,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     
                     activeVideo.src = activeVideo.dataset.src;
+                }
+                
+                // Remove background from active slide
+                const activeCard = activeVideo.closest('.video-card');
+                if (activeCard) {
+                    activeCard.style.background = 'transparent';
                 }
                 
                 activeVideo.play().catch(function(error) {
@@ -334,15 +407,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.opacity = '';
                 element.style.transform = '';
             });
+            
+            // Reset background for non-active slides
+            if (!slide.classList.contains('swiper-slide-active')) {
+                const videoCard = slide.querySelector('.video-card');
+                if (videoCard) {
+                    videoCard.style.background = 'var(--card-bg)';
+                }
+            }
         });
     }
     
     // Function to animate active slide
     function animateActiveSlide() {
         const activeSlide = document.querySelector('.swiper-slide-active');
+        const allSlides = document.querySelectorAll('.swiper-slide:not(.swiper-slide-active)');
+        
         if (activeSlide) {
             const info = activeSlide.querySelector('.video-info');
             const details = activeSlide.querySelectorAll('.video-info p, .video-meta, .watch-btn');
+            const videoCard = activeSlide.querySelector('.video-card');
+            const videoWrapper = activeSlide.querySelector('.video-wrapper');
+            const video = activeSlide.querySelector('video');
+            
+            // Enhanced active slide styling
+            if (videoCard) {
+                videoCard.style.background = 'transparent';
+                videoCard.style.boxShadow = 'none';
+                videoCard.style.border = 'none';
+                
+                // Add a subtle scale animation
+                gsap.to(videoCard, {
+                    scale: 1.02,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
+            
+            // Enhance video appearance
+            if (video) {
+                gsap.to(video, {
+                    scale: 1.02,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    borderRadius: '12px'
+                });
+            }
+            
+            if (videoWrapper) {
+                videoWrapper.style.borderRadius = '0';
+                videoWrapper.style.overflow = 'visible';
+            }
             
             if (info) {
                 info.style.transform = 'translateY(0)';
@@ -355,6 +470,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 100 * (index + 1));
             });
         }
+        
+        // Enhance non-active slides
+        allSlides.forEach(slide => {
+            const videoCard = slide.querySelector('.video-card');
+            if (videoCard) {
+                gsap.to(videoCard, {
+                    scale: 0.85,
+                    opacity: 0.7,
+                    filter: 'blur(2px)',
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
+        });
     }
     
     // Add click event to watch buttons

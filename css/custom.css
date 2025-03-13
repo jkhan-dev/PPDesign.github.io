@@ -119,19 +119,19 @@ select:focus-within {
 }
 
 .main_header {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 999;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: var(--header-bg-color);
     transition: all 0.3s ease;
     padding: 12px 0;
     backdrop-filter: blur(10px);
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.08); */
-    height: 80px;
+    height: var(--header-height);
     display: flex;
     align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .main_header.is-sticky {
@@ -1454,8 +1454,8 @@ h6.vendor_title {
 
 @media screen and (max-width: 767px) {
     .main_header {
-        height: 60px;
-        padding: 6px 0;
+        height: var(--header-height-mobile);
+        padding: 8px 0;
     }
     
     .navbar-toggler {
@@ -1650,6 +1650,9 @@ h6.vendor_title {
     --gradient-accent: linear-gradient(135deg, #790232 0%, #f90000 100%);
     --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --header-bg-color: rgba(255, 255, 255, 0.8);
+    --header-height: 80px;
+    --header-height-mobile: 60px;
 }
 
 /* Modern Animations */

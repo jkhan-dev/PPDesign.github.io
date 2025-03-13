@@ -26,7 +26,7 @@
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
-    <link href="css/video-slider.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/video-slider.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -77,116 +77,45 @@
     <!-- main header end here -->
     
     <!-- Video Slider Hero Section Start -->
-    <div class="video-showcase">
-        <div class="container">
-            
-            <!-- Video Slider Section -->
-            <section class="video-slider-section">
-                <div class="swiper videoSwiper">
-                    <div class="swiper-wrapper">
-                        <!-- Video 1 -->
-                        <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./whats.mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                               
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Video 2 -->
-                        <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./whatsa.mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                               
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Video 3 -->
-                       <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./reel1 (1).mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                               
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Video 4 -->
-                        <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./reel1 (2).mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                               
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Video 5 -->
-                        <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./reel1 (1).mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                               
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Video 6 -->
-                        <div class="swiper-slide">
-                            <div class="video-card">
-                                <div class="video-wrapper">
-                                    <video data-src="./reel1 (2).mp4" muted loop playsinline></video>
-                                    <!-- Video loader will be added dynamically by JavaScript -->
-                                    <div class="mute-indicator">Sound Off</div>
-                                </div>
-                                
-                                <div class="video-controls">
-                                    <button class="control-btn mute-toggle"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation Controls -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    
-                    <!-- Pagination -->
-                    <div class="swiper-pagination"></div>
+    <section class="hero-video-section">
+        <div class="hero-video-container">
+            <!-- Network interruption loader -->
+            <div class="network-loader">
+                <div class="loader-container">
+                    <div class="loader-spinner"></div>
+                    <div class="loader-text">Reconnecting to video stream...</div>
                 </div>
-            </section>
+            </div>
             
+            <!-- Placeholder for error states only -->
+            <div class="video-placeholder">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Beauty Services" class="placeholder-image">
+                <div class="loading-animation">
+                    <div class="spinner"></div>
+                    <p>Unable to load video</p>
+                </div>
+            </div>
+            
+            <video autoplay muted loop>
+                <source src="./whatsa.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
            
+            <div class="video-controls">
+                <button id="playPauseBtn" class="control-btn" aria-label="Play/Pause video">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <span id="videoTime" class="video-time">0:00</span>
+                <button id="muteBtn" class="control-btn" aria-label="Mute/Unmute video">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+            </div>
+            <div class="video-progress-container">
+                <div class="video-progress-bar" id="videoProgress"></div>
+            </div>
         </div>
-    </div>
+    </section> 
     <!-- Video Slider Hero Section End -->
     
     <!-- how to order section start -->
@@ -397,9 +326,10 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- GSAP for enhanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <!-- Custom Scripts -->
-    <script src="js/video-slider.js"></script>
     <script src="js/custom.js"></script>
     
     <!-- Lazy load remaining content -->
@@ -415,6 +345,299 @@
                 });
             }, 1000);
         });
+        document.addEventListener('DOMContentLoaded', function() {
+       
+        
+        // Video elements
+        const videoContainer = document.querySelector('.hero-video-container');
+        const video = document.querySelector('.hero-video-container video');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const progressBar = document.getElementById('videoProgress');
+        const progressContainer = document.querySelector('.video-progress-container');
+        const videoTimeDisplay = document.getElementById('videoTime');
+        const videoPlaceholder = document.querySelector('.video-placeholder');
+        const networkLoader = document.querySelector('.network-loader');
+        const loaderText = document.querySelector('.loader-text');
+        
+        // Network state variables
+        let networkInterrupted = false;
+        let loadingTimeout;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+        
+        // Play/Pause button functionality
+        playPauseBtn.addEventListener('click', function() {
+            if (video.paused) {
+                video.play()
+                    .then(() => {
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                        videoContainer.classList.remove('video-paused');
+                    })
+                    .catch(error => {
+                        console.error('Error playing video:', error);
+                        // Show appropriate message for autoplay restrictions
+                        if (error.name === 'NotAllowedError') {
+                            loaderText.textContent = 'Click to play video';
+                            videoContainer.classList.add('video-paused');
+                        }
+                    });
+            } else {
+                video.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                videoContainer.classList.add('video-paused');
+            }
+        });
+        
+        // Mute button functionality
+        muteBtn.addEventListener('click', function() {
+            video.muted = !video.muted;
+            if (video.muted) {
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        });
+
+        // Format time function
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Progress bar functionality
+        video.addEventListener('timeupdate', function() {
+            // If we're getting timeupdate events, the network is working
+            if (networkInterrupted) {
+                networkInterrupted = false;
+                clearTimeout(loadingTimeout);
+                videoContainer.classList.remove('video-loading');
+                reconnectAttempts = 0;
+            }
+            
+            const progress = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = progress + '%';
+            
+            // Update time display
+            videoTimeDisplay.textContent = formatTime(video.currentTime);
+        });
+        
+        // Click on progress bar to seek
+        progressContainer.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            video.currentTime = pos * video.duration;
+        });
+        
+        // Double click on video to toggle fullscreen
+        video.addEventListener('dblclick', function() {
+            if (!document.fullscreenElement) {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) { /* Safari */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { /* IE11 */
+                    video.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+            }
+        });
+
+        // Function to handle video sizing
+        function handleVideoSize() {
+            // Get the video's natural aspect ratio
+            const videoRatio = video.videoWidth / video.videoHeight;
+            
+            // Get the container dimensions
+            const container = document.querySelector('.hero-video-container');
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            
+            // Check if we're on mobile
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // On mobile, we want the video to fill the width
+                video.style.width = '100%';
+                video.style.height = 'auto';
+                
+                // If this makes the video too short, adjust to fill height instead
+                if (video.offsetHeight < containerHeight) {
+                    video.style.width = 'auto';
+                    video.style.height = '100%';
+                }
+            } else {
+                // On desktop, maintain portrait aspect ratio
+                if (videoRatio < 1) {
+                    // Portrait video - maintain height and adjust width
+                    video.style.height = '100%';
+                    video.style.width = 'auto';
+                } else {
+                    // If the video is actually landscape, we need to handle it differently
+                    // Calculate the height needed to maintain the video's aspect ratio
+                    const targetHeight = containerWidth / videoRatio;
+                    
+                    if (targetHeight <= containerHeight) {
+                        // If the calculated height fits within the container
+                        video.style.width = '100%';
+                        video.style.height = 'auto';
+                    } else {
+                        // If the calculated height exceeds the container height
+                        video.style.height = '100%';
+                        video.style.width = 'auto';
+                    }
+                }
+            }
+        }
+        
+        // Network state monitoring
+        function checkNetworkState() {
+            // Check if the video is stalled or waiting
+            if (video.networkState === 2) { // NETWORK_LOADING
+                if (!networkInterrupted) {
+                    networkInterrupted = true;
+                    
+                    // Show loading state after a short delay to avoid flickering
+                    loadingTimeout = setTimeout(() => {
+                        videoContainer.classList.add('video-loading');
+                        loaderText.textContent = 'Reconnecting to video stream...';
+                        
+                        // Update message based on reconnect attempts
+                        reconnectAttempts++;
+                        if (reconnectAttempts > 1) {
+                            loaderText.textContent = `Reconnecting to video stream... (Attempt ${reconnectAttempts})`;
+                        }
+                        
+                        // After multiple attempts, suggest refreshing
+                        if (reconnectAttempts >= maxReconnectAttempts) {
+                            loaderText.textContent = 'Network issues detected. Video will resume automatically when connection improves.';
+                        }
+                    }, 1000); // Wait 1 second before showing loader
+                }
+            } else if (video.networkState === 3) { // NETWORK_NO_SOURCE
+                clearTimeout(loadingTimeout);
+                videoContainer.classList.add('video-error');
+                videoContainer.classList.remove('video-loaded', 'video-loading');
+                networkInterrupted = false;
+            }
+        }
+        
+        // Check network state periodically
+        setInterval(checkNetworkState, 2000);
+        
+        // Call the function when the video metadata is loaded
+        video.addEventListener('loadedmetadata', function() {
+            handleVideoSize();
+            videoContainer.classList.remove('video-loading');
+            networkInterrupted = false;
+        });
+        
+        // Also call it on window resize
+        window.addEventListener('resize', handleVideoSize);
+        
+        // Handle loading event
+        video.addEventListener('loadeddata', function() {
+            console.log('Video loaded successfully');
+            handleVideoSize(); // Ensure proper sizing once loaded
+            
+            // Initialize time display
+            videoTimeDisplay.textContent = formatTime(0);
+            
+            // Mark video as loaded
+            videoContainer.classList.add('video-loaded');
+            videoContainer.classList.remove('video-loading', 'video-error');
+            networkInterrupted = false;
+            reconnectAttempts = 0;
+        });
+        
+        // Handle waiting/buffering event
+        video.addEventListener('waiting', function() {
+            // Only show loading if it persists for more than a second
+            if (!networkInterrupted) {
+                networkInterrupted = true;
+                loadingTimeout = setTimeout(() => {
+                    videoContainer.classList.add('video-loading');
+                    loaderText.textContent = 'Buffering video...';
+                }, 1000);
+            }
+        });
+        
+        // Handle playing event
+        video.addEventListener('playing', function() {
+            clearTimeout(loadingTimeout);
+            videoContainer.classList.add('video-loaded');
+            videoContainer.classList.remove('video-loading', 'video-paused');
+            networkInterrupted = false;
+            reconnectAttempts = 0;
+        });
+        
+        // Handle paused event
+        video.addEventListener('pause', function() {
+            videoContainer.classList.add('video-paused');
+        });
+        
+        // Handle error event
+        video.addEventListener('error', function(e) {
+            console.error('Error loading video:', e);
+            
+            // Show error state
+            videoContainer.classList.add('video-error');
+            videoContainer.classList.remove('video-loaded', 'video-loading');
+            
+            // Fall back to image if video fails to load
+            const heroSection = document.querySelector('.hero-video-section');
+            heroSection.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')";
+            heroSection.style.backgroundSize = 'cover';
+            heroSection.style.backgroundPosition = 'center';
+        });
+        
+        // Handle video end - loop manually to ensure progress bar resets
+        video.addEventListener('ended', function() {
+            video.currentTime = 0;
+            video.play().catch(error => {
+                console.error('Error replaying video:', error);
+                videoContainer.classList.add('video-paused');
+            });
+        });
+        
+        // Handle slow connection or stalled video
+        video.addEventListener('stalled', function() {
+            if (!networkInterrupted) {
+                networkInterrupted = true;
+                loadingTimeout = setTimeout(() => {
+                    videoContainer.classList.add('video-loading');
+                    loaderText.textContent = 'Network interrupted. Reconnecting...';
+                }, 1000);
+            }
+        });
+        
+        // Handle network online/offline events
+        window.addEventListener('online', function() {
+            if (networkInterrupted) {
+                loaderText.textContent = 'Connection restored. Resuming video...';
+                // Try to resume the video
+                setTimeout(() => {
+                    video.play().catch(error => {
+                        console.error('Error resuming video:', error);
+                    });
+                }, 1000);
+            }
+        });
+        
+        window.addEventListener('offline', function() {
+            networkInterrupted = true;
+            videoContainer.classList.add('video-loading');
+            loaderText.textContent = 'Network connection lost. Waiting to reconnect...';
+        });
+    });
     </script>
 </body>
 
