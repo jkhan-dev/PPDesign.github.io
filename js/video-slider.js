@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlide: 0,
         slideCount: document.querySelectorAll('.hero-video-slide').length,
         autoplayInterval: null,
-        autoplayDelay: 8000, // 8 seconds between slides
+        autoplayDelay: 80000000, // 8 seconds between slides
         isAnimating: false, // Flag to prevent rapid clicking
         touchStartX: 0,
         touchEndX: 0,
