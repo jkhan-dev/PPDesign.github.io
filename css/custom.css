@@ -14,7 +14,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: var(--gradient-accent);
     border-radius: 4px;
 }
 
@@ -1754,7 +1754,7 @@ h6.vendor_title {
     --gradient-accent: linear-gradient(135deg, #790232 0%, #f90000 100%);
     --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --header-bg-color: rgba(255, 255, 255, 0.8);
+    --header-bg-color:#003c7a;
     --header-height: 80px;
     --header-height-mobile: 60px;
 }
